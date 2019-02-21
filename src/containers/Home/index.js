@@ -12,13 +12,13 @@ const StyledButton = styled(Button)`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   transition: all 0.3s ease-in-out;
 
   &:hover,
   &:active,
   &:focus {
-    transform: translate(-50%) scale(1.05);
+    transform: translate(-50%, -50%) scale(1.05);
   }
 
   svg {
