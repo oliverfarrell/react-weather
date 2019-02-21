@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "@babel/react",
+    [
+      "@babel/env",
+      {
+        "targets": ["last 2 versions"],
+        "useBuiltIns": "entry",
+        "shippedProposals": true
+      }
+    ]
+  ],
+  "plugins": ["@babel/proposal-class-properties", "@babel/syntax-dynamic-import", "emotion"]
+}
