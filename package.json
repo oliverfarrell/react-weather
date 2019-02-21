@@ -14,7 +14,7 @@
     "test:watch": "jest --silent --watchAll",
     "test:update": "jest --silent -u",
     "dev": "webpack-dev-server --config config/webpack/webpack.dev.js --open --color --progress --hide-modules --display-optimization-bailout --hot --inline",
-    "prod": "rimraf dist && webpack --config config/webpack/webpack.prod.js"
+    "prod": "NODE_ENV=production rimraf dist && webpack --config config/webpack/webpack.prod.js -p"
   },
   "author": "Oliver Farrell",
   "devDependencies": {

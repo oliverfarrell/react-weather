@@ -7,7 +7,7 @@ import Home from "containers/Home";
 import NotFound from "containers/NotFound";
 
 const LoadableForecast = Loadable({
-  loader: () => import("containers/Forecast" /* webpackChunkName: "dashboard" */),
+  loader: () => import("containers/Forecast" /* webpackChunkName: "forecast" */),
   loading: () => <Spinner colorScheme="light" /> // eslint-disable-line
 });
 
