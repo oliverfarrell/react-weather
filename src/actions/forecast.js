@@ -11,9 +11,10 @@ export function getForecast(latitude, longitude) {
           return hours.map(hour => ({
             timestamp: hour.dt_txt,
             temperature: {
-              min: Math.round(hour.main.temp_min),
-              max: Math.round(hour.main.temp_max),
-              current: Math.round(hour.main.temp)
+              // round all values to 1 decimal place
+              min: Math.round(hour.main.temp_min * 10) / 10,
+              max: Math.round(hour.main.temp_max * 10) / 10,
+              current: Math.round(hour.main.temp * 10) / 10
             },
             humidity: hour.main.humidity,
             wind: hour.wind.speed,
