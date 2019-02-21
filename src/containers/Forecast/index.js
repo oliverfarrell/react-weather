@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "@reach/router";
+import { Redirect, Link } from "@reach/router";
 import { connect } from "react-redux";
 import { getForecast } from "actions/forecast";
 
@@ -34,6 +34,11 @@ const LocationButton = styled(Button)`
   bottom: ${GLOBAL_SPACING_UNIT};
   left: 50%;
   transform: translateX(-50%) scale(0.6);
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 `;
 
 class Forecast extends React.Component {
@@ -50,7 +55,9 @@ class Forecast extends React.Component {
           {forecast.days.map((day, index) => (
             <StyledDailyForecast key={index} day={getDay(day[0].timestamp)} forecast={day} />
           ))}
-          <LocationButton>Loaction: {forecast.location.name}</LocationButton>
+          <LocationButton>
+            <Link to="/">{forecast.location.name}</Link>
+          </LocationButton>
         </ForecastContainer>
       </StyledForecast>
     );
