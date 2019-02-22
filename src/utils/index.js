@@ -8,16 +8,11 @@ export const MEDIA_QUERIES = {
   DESKTOP: "1099px"
 };
 
-export function chunk(array, size) {
-  const chunked_arr = [];
-  let copied = [...array];
-  const numOfChild = Math.ceil(copied.length / size);
-
-  for (let i = 0; i < numOfChild; i++) {
-    chunked_arr.push(copied.splice(0, size));
-  }
-
-  return chunked_arr;
+export function chunkBy(array, key) {
+  return array.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
 }
 
 export function getDay(date) {

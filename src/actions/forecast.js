@@ -1,4 +1,4 @@
-import { chunk } from "utils";
+import { chunkBy } from "utils";
 
 export function getForecast(latitude, longitude) {
   return function getForecastThunk(dispatch) {
@@ -7,27 +7,28 @@ export function getForecast(latitude, longitude) {
     )
       .then(response => response.json())
       .then(forecast => {
-        const days = chunk(forecast.list, 8).map(hours => {
-          return hours.map(hour => ({
-            timestamp: hour.dt_txt,
-            temperature: {
-              // round all values to 1 decimal place
-              min: Math.round(hour.main.temp_min * 10) / 10,
-              max: Math.round(hour.main.temp_max * 10) / 10,
-              current: Math.round(hour.main.temp * 10) / 10
-            },
-            humidity: hour.main.humidity,
-            wind: hour.wind.speed,
-            weather: {
-              description: hour.weather[0].description,
-              id: hour.weather[0].id
-            }
-          }));
-        });
+        const prep = forecast.list.map(hour => ({
+          date: hour.dt_txt.substring(0, 10),
+          timestamp: hour.dt_txt,
+          temperature: {
+            // round all values to 1 decimal place
+            min: Math.round(hour.main.temp_min * 10) / 10,
+            max: Math.round(hour.main.temp_max * 10) / 10,
+            current: Math.round(hour.main.temp * 10) / 10
+          },
+          humidity: hour.main.humidity,
+          wind: hour.wind.speed,
+          weather: {
+            description: hour.weather[0].description,
+            id: hour.weather[0].id
+          }
+        }));
+
+        const forecastGroupedByDay = chunkBy(prep, "date");
 
         const payload = {
           location: forecast.city,
-          days
+          days: Object.values(forecastGroupedByDay)
         };
 
         return dispatch({
